@@ -38,7 +38,7 @@ void SkBitmapProcState::platformProcs() {
     if (!SkCpu::Supports(SkCpu::SSE2)) {
         return;
     }
-    const bool ssse3 = SkCpu::Supports(SkCpu::SSSE3);
+    const bool ssse3 = false;//SkCpu::Supports(SkCpu::SSSE3);
 
     /* Check fSampleProc32 */
     if (fSampleProc32 == S32_opaque_D32_filter_DX) {

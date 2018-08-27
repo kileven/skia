@@ -26,8 +26,9 @@ if OS_NAME == 'Darwin':
   OS_LIBS = OS_LIBS + ['stdc++', 'pthread', 'm', 'dl']
 
 elif OS_NAME == 'Linux':
-  OS_LIBS = ['freetype', 'GL'] + OS_LIBS + ['stdc++', 'pthread', 'm', 'dl']
+  OS_LIBS = ['fontconfig', 'freetype', 'GL'] + OS_LIBS + ['stdc++', 'pthread', 'm', 'dl']
   COMMON_CCFLAGS = COMMON_CCFLAGS + ' -DLINUX -DHAS_PTHREAD'
+  OS_CPPPATH=['/usr/include/freetype2/']
 
 elif OS_NAME == 'Windows':
   OS_LIBS=['SDL2', 'glad']

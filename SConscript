@@ -57,20 +57,25 @@ if OS_NAME == 'Darwin':
     'src/ports/SkImageGenerator_none.cpp',
     'src/ports/SkOSFile_stdio.cpp', 
     'src/ports/SkDebug_stdio.cpp', 
+    'src/ports/SkTLS_pthread.cpp',
     'src/gpu/gl/mac/GrGLMakeNativeInterface_mac.cpp'
   ]
 elif OS_NAME == 'Linux':
   PLATFORM_SOURCES = [
     'src/codec/SkMasks.cpp',
     'src/codec/SkBmpCodec.cpp',
-    'src/ports/SkFontHost_mac.cpp',
     'src/ports/SkMemory_malloc.cpp', 
     'src/ports/SkOSFile_posix.cpp', 
     'src/ports/SkImageGenerator_none.cpp',
     'src/ports/SkOSFile_stdio.cpp', 
-    'src/ports/SkDebug_stdio.cpp', 
-    'src/gpu/gl/mac/GrGLMakeNativeInterface_mac.cpp'
-  ]
+    'src/ports/SkDebug_stdio.cpp',
+    'src/ports/SkFontMgr_fontconfig.cpp',
+    'src/ports/SkFontMgr_fontconfig_factory.cpp',
+    'src/ports/SkTLS_pthread.cpp',
+    'src/gpu/gl/glx/GrGLMakeNativeInterface_glx.cpp'
+  ] + Glob('src/ports/SkFontHost_FreeType*.cpp');
+  LIB_SOURCES.remove(Glob('src/opts/SkBitmapProcState_opts_SSSE3.cpp')[0]);
+
 elif OS_NAME == 'Windows':
   PLATFORM_SOURCES = [
     'src/codec/SkMasks.cpp',
@@ -80,9 +85,12 @@ elif OS_NAME == 'Windows':
     'src/ports/SkOSFile_posix.cpp', 
     'src/ports/SkOSFile_stdio.cpp', 
     'src/ports/SkDebug_stdio.cpp', 
+    'src/ports/SkTLS_win.cpp',
     'src/gpu/gl/mac/GrGLMakeNativeInterface_mac.cpp'
   ]
 
+LIB_SOURCES.remove(Glob('src/utils/SkLua.cpp')[0]);
+LIB_SOURCES.remove(Glob('src/utils/SkLuaCanvas.cpp')[0]);
 env.Library(os.path.join(LIB_DIR, 'skia'), LIB_SOURCES + PLATFORM_SOURCES)
 
 env['LIBS'] = ['skia'] + env['LIBS']
