@@ -24,21 +24,22 @@ if OS_NAME == 'Darwin':
   OS_LINKFLAGS='-framework OpenGL -framework CoreFoundation -framework  CoreGraphics -framework  IOKit -framework ApplicationServices'
   COMMON_CCFLAGS = COMMON_CCFLAGS + ' -D__APPLE__ -DHAS_PTHREAD -DMACOS'
   OS_LIBS = OS_LIBS + ['stdc++', 'pthread', 'm', 'dl']
+  OS_CPPPATH=[os.path.join(SKIA_ROOT, 'include/utils/linux'), ]
 
 elif OS_NAME == 'Linux':
   OS_LIBS = ['fontconfig', 'freetype', 'GL'] + OS_LIBS + ['stdc++', 'pthread', 'm', 'dl']
   COMMON_CCFLAGS = COMMON_CCFLAGS + ' -DLINUX -DHAS_PTHREAD'
-  OS_CPPPATH=['/usr/include/freetype2/']
+  OS_CPPPATH=['/usr/include/freetype2/',   os.path.join(SKIA_ROOT, 'include/utils/linux'), ]
 
 elif OS_NAME == 'Windows':
   OS_LIBS=['SDL2', 'glad']
   OS_FLAGS='-DWIN32 -D_WIN32 -DWINDOWS /EHsc -D_CONSOLE  /DEBUG /Od /ZI'
   OS_LINKFLAGS='/MACHINE:X64 /DEBUG'
   OS_LIBPATH=[SKIA_ROOT+'/SDL2-2.0.7/lib/x64']
-  OS_CPPPATH=[SKIA_ROOT+'/SDL2-2.0.7/']
+  OS_CPPPATH=[SKIA_ROOT+'/SDL2-2.0.7/', os.path.join(SKIA_ROOT, 'include/utils/win')]
   OS_SUBSYSTEM_CONSOLE='/SUBSYSTEM:CONSOLE  '
   OS_SUBSYSTEM_WINDOWS='/SUBSYSTEM:WINDOWS  '
-  
+
 LIBS=OS_LIBS
 
 CCFLAGS=OS_FLAGS + COMMON_CCFLAGS 
@@ -51,7 +52,6 @@ CPPPATH=[
   os.path.join(SKIA_ROOT, 'include/gpu'), 
   os.path.join(SKIA_ROOT, 'include/private'), 
   os.path.join(SKIA_ROOT, 'include/utils'), 
-  os.path.join(SKIA_ROOT, 'include/utils/mac'), 
   os.path.join(SKIA_ROOT, 'include/ports'), 
   os.path.join(SKIA_ROOT, 'include/codec'), 
   os.path.join(SKIA_ROOT, 'include/image'), 

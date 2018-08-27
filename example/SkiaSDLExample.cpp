@@ -24,6 +24,8 @@
 #include <OpenGL/gl.h>
 #elif defined(SK_BUILD_FOR_IOS)
 #include <OpenGLES/ES2/gl.h>
+#elif defined(WIN32)
+#include "glad/glad.h"
 #endif
 
 /*

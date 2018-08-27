@@ -6,7 +6,7 @@ env=DefaultEnvironment().Clone()
 LIB_DIR=os.environ['LIB_DIR'];
 BIN_DIR=os.environ['BIN_DIR'];
 
-env['CCFLAGS'] = env['CCFLAGS'] + ' -std=c++14 '
+
 LIB_SOURCES=Glob('src/c/*.cpp') + Glob('src/core/*.cpp') \
  + Glob('src/gpu/*.cpp')  \
  + Glob('src/opts/*sse*.cpp')  \
@@ -34,7 +34,6 @@ LIB_SOURCES=Glob('src/c/*.cpp') + Glob('src/core/*.cpp') \
  + Glob('src/effects/*/*.cpp')  \
  + Glob('src/effects/imagefilters/*.cpp')  \
  + Glob('src/jumper/*.cpp')  \
- + Glob('src/images/*.cpp') \
  + Glob('src/sfnt/*.cpp') \
  + Glob('third_party/skcms/*.cc') \
  + [
@@ -60,6 +59,7 @@ if OS_NAME == 'Darwin':
     'src/ports/SkTLS_pthread.cpp',
     'src/gpu/gl/mac/GrGLMakeNativeInterface_mac.cpp'
   ]
+  env['CCFLAGS'] = env['CCFLAGS'] + ' -std=c++14 '
 elif OS_NAME == 'Linux':
   PLATFORM_SOURCES = [
     'src/codec/SkMasks.cpp',
@@ -74,19 +74,22 @@ elif OS_NAME == 'Linux':
     'src/ports/SkTLS_pthread.cpp',
     'src/gpu/gl/glx/GrGLMakeNativeInterface_glx.cpp'
   ] + Glob('src/ports/SkFontHost_FreeType*.cpp');
+  env['CCFLAGS'] = env['CCFLAGS'] + ' -std=c++14 '
   LIB_SOURCES.remove(Glob('src/opts/SkBitmapProcState_opts_SSSE3.cpp')[0]);
 
 elif OS_NAME == 'Windows':
   PLATFORM_SOURCES = [
     'src/codec/SkMasks.cpp',
     'src/codec/SkBmpCodec.cpp',
-    'src/ports/SkFontHost_mac.cpp',
     'src/ports/SkMemory_malloc.cpp', 
-    'src/ports/SkOSFile_posix.cpp', 
-    'src/ports/SkOSFile_stdio.cpp', 
-    'src/ports/SkDebug_stdio.cpp', 
+    'src/ports/SkOSFile_win.cpp', 
+    'src/ports/SkOSLibrary_win.cpp', 
+    'src/ports/SkDebug_win.cpp', 
     'src/ports/SkTLS_win.cpp',
-    'src/gpu/gl/mac/GrGLMakeNativeInterface_mac.cpp'
+	'src/ports/SkFontHost_win.cpp',
+	'src/ports/SkDebug_win.cpp',
+	'src/ports/SkRemotableFontMgr_win_dw.cpp',
+    'src/ports/SkTypeface_win_dw.cpp'
   ]
 
 LIB_SOURCES.remove(Glob('src/utils/SkLua.cpp')[0]);
