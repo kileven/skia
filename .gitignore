@@ -54,3 +54,5 @@ gl-out
 
 node_modules
 tools/lottiecap/filmstrip.png
+*.o
+tags

@@ -8,7 +8,7 @@
 
 #include "GrBackendSurface.h"
 #include "GrContext.h"
-#include "SDL.h"
+#include "SDL2/SDL.h"
 #include "SkCanvas.h"
 #include "SkRandom.h"
 #include "SkSurface.h"

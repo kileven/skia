@@ -51,7 +51,7 @@ protected:
 
     static const Attribute& IthAttribute(int i) {
         SK_ABORT("Illegal attribute Index");
-        static constexpr Attribute kBogus;
+        static Attribute kBogus;
         return kBogus;
     }
 
@@ -73,7 +73,7 @@ private:
     // Since most subclasses don't use instancing provide a default implementation for that case.
     const Attribute& onInstanceAttribute(int i) const override {
         SK_ABORT("No instanced attributes");
-        static constexpr Attribute kBogus;
+        static Attribute kBogus;
         return kBogus;
     }
 

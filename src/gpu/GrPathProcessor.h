@@ -40,13 +40,13 @@ public:
 private:
     const Attribute& onVertexAttribute(int i) const final {
         SK_ABORT("No vertex attributes");
-        static constexpr Attribute kBogus;
+        static Attribute kBogus;
         return kBogus;
     }
 
     const Attribute& onInstanceAttribute(int i) const final {
         SK_ABORT("No instanced attributes");
-        static constexpr Attribute kBogus;
+        static Attribute kBogus;
         return kBogus;
     }
 

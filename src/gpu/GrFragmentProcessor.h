@@ -459,7 +459,7 @@ private:
 
 const GrFragmentProcessor::TextureSampler& GrFragmentProcessor::IthTextureSampler(int i) {
     SK_ABORT("Illegal texture sampler index");
-    static const TextureSampler kBogus;
+    static TextureSampler kBogus;
     return kBogus;
 }
 
